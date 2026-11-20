@@ -166,7 +166,8 @@ export const App: React.FC = () => {
       {currentResult && (
         <ScaleResultModal
           result={currentResult}
-          onClose={() => setCurrentResult(null)}
+          placedIngredients={placedIngredients}
+          ingredientsMap={ingredientsMap}
           onRestart={handleRestart}
         />
       )}
