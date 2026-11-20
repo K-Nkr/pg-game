@@ -63,6 +63,22 @@ export const INGREDIENTS: Ingredient[] = [
     defaultScale: 1.0,
   },
 
+  {
+    id: 'rainbow-dango',
+    name: '虹色団子',
+    nameZh: '彩虹丸子',
+    category: 'noodle',
+    categoryLabel: '麺・主食',
+    baseWeight: 35,
+    weightJitter: 3,
+    image: '/ingredients/rainbow-dango.svg',
+    description: '赤・橙・黄、3色の串団子。甘くてもっちり、麻辣湯の隠れた名わき役！',
+    flavor: 'あまもち三兄弟',
+    width: 80,
+    height: 80,
+    defaultScale: 1.0,
+  },
+
   // 肉・魚介 (全6種)
   {
     id: 'spam',
