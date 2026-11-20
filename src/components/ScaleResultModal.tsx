@@ -147,23 +147,23 @@ export const ScaleResultModal: React.FC<ScaleResultModalProps> = ({
 
   return (
     // ×ボタンや背景タップで戻れない固定モーダル（1発勝負でお会計！）
-    <div className="fixed inset-0 z-50 bg-stone-950/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-5 overflow-y-auto animate-fadeIn">
-      <div className="relative w-full max-w-4xl bg-gradient-to-b from-amber-50 to-stone-100 rounded-3xl shadow-2xl border-4 border-amber-400 overflow-hidden my-auto">
+    <div className="fixed inset-0 z-50 bg-stone-950/85 backdrop-blur-md flex items-start justify-center overflow-y-auto animate-fadeIn">
+      <div className="relative w-full max-w-4xl bg-gradient-to-b from-amber-50 to-stone-100 rounded-3xl shadow-2xl border-4 border-amber-400 overflow-hidden my-3 mx-3">
         {/* Header bar (×ボタンは完全に撤廃) */}
-        <div className="bg-gradient-to-r from-red-800 via-red-700 to-amber-800 p-3.5 sm:p-4 text-white text-center relative border-b-2 border-amber-400 shadow-md">
+        <div className="bg-gradient-to-r from-red-800 via-red-700 to-amber-800 p-3 sm:p-4 text-white text-center border-b-2 border-amber-400 shadow-md">
           <div className="flex items-center justify-center gap-2">
-            <span className="text-xl">🍲</span>
-            <h2 className="text-lg sm:text-2xl font-black tracking-wide text-amber-200">
+            <span className="text-lg">🍲</span>
+            <h2 className="text-base sm:text-2xl font-black tracking-wide text-amber-200">
               {measuring ? '⚖️ 計量＆お会計中...' : '🧾 お会計レシート＆完成発表'}
             </h2>
           </div>
         </div>
 
-        {/* Modal Main Body: 2 Columns on desktop (左: 完成したお皿 / 右: スケール＆レシート) */}
-        <div className="p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+        {/* Modal Main Body: スマホ縦1列 / PC横2列 */}
+        <div className="p-3 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-5 items-start">
           
           {/* Left Column: 作ったお皿（完成した麻辣湯ボウルプレビュー） */}
-          <div className="lg:col-span-5 flex flex-col items-center justify-center bg-stone-900/10 p-3 sm:p-4 rounded-3xl border-2 border-amber-300/60 shadow-inner">
+          <div className="lg:col-span-5 flex flex-col items-center justify-center bg-stone-900/10 p-2 sm:p-4 rounded-3xl border-2 border-amber-300/60 shadow-inner">
             <div className="text-center mb-2">
               <span className="text-xs font-black text-red-900 bg-amber-200 px-3 py-1 rounded-full border border-amber-300 inline-block shadow-xs">
                 ✨ あなたが作った麻辣湯 ✨
@@ -173,8 +173,8 @@ export const ScaleResultModal: React.FC<ScaleResultModalProps> = ({
               </div>
             </div>
 
-            {/* Bowl Container */}
-            <div className="relative w-full max-w-[270px] aspect-square rounded-full bg-gradient-to-br from-stone-100 via-stone-200 to-stone-400 p-3 shadow-2xl border-4 border-amber-500 flex items-center justify-center">
+            {/* Bowl Container - スマホで小さく */}
+            <div className="relative w-full max-w-[min(55vw,270px)] aspect-square rounded-full bg-gradient-to-br from-stone-100 via-stone-200 to-stone-400 p-3 shadow-2xl border-4 border-amber-500 flex items-center justify-center">
               {/* Decorative Red Rim */}
               <div className="absolute inset-1.5 rounded-full border-4 border-red-700 pointer-events-none opacity-90 shadow-inner flex items-center justify-center">
                 <div className="w-full h-full rounded-full border border-dashed border-amber-400 opacity-60"></div>
@@ -373,10 +373,10 @@ export const ScaleResultModal: React.FC<ScaleResultModalProps> = ({
                 <div className="flex flex-col sm:flex-row items-center gap-2 pt-1">
                   <button
                     onClick={handleShare}
-                    className="w-full sm:flex-1 py-3 px-4 rounded-xl bg-stone-900 hover:bg-stone-800 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 shadow-md transition-all active:scale-95"
+                    className="w-full sm:flex-1 py-3.5 px-4 rounded-xl bg-stone-900 hover:bg-stone-800 active:bg-stone-950 text-white font-bold text-sm flex items-center justify-center gap-1.5 shadow-md transition-all active:scale-95"
                   >
                     <Share2 size={16} />
-                    <span>X (Twitter) で結果をシェア</span>
+                    <span>X (Twitter) でシェア</span>
                   </button>
 
                   <button
@@ -384,7 +384,7 @@ export const ScaleResultModal: React.FC<ScaleResultModalProps> = ({
                       sound.playClick();
                       onRestart();
                     }}
-                    className="w-full sm:flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-red-700 to-amber-700 hover:from-red-600 hover:to-amber-600 text-white font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 shadow-md transition-all active:scale-95 border border-amber-300"
+                    className="w-full sm:flex-1 py-3.5 px-4 rounded-xl bg-gradient-to-r from-red-700 to-amber-700 hover:from-red-600 hover:to-amber-600 active:from-red-800 active:to-amber-800 text-white font-black text-sm flex items-center justify-center gap-1.5 shadow-md transition-all active:scale-95 border border-amber-300"
                   >
                     <RefreshCw size={16} />
                     <span>もう一度盛る！（新規挑戦）</span>

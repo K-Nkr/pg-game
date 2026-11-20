@@ -1,11 +1,18 @@
 @import "tailwindcss";
 
 @layer base {
+  html {
+    /* iOSでフォントサイズ自動調整を防ぐ */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
   body {
     font-family: 'M PLUS Rounded 1c', sans-serif;
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
+    /* モバイルでのバウンススクロール防止 */
+    overscroll-behavior: none;
   }
 }
 
@@ -61,4 +68,38 @@
 /* 中華風雷紋境界線 */
 .border-chinese {
   border-image: repeating-linear-gradient(45deg, #b91c1c, #b91c1c 8px, #dc2626 8px, #dc2626 16px) 10;
+}
+
+/* 具材パレット横スクロール（スマホ向け）*/
+.ingredient-scroll {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 4px;
+}
+
+.ingredient-scroll > * {
+  scroll-snap-align: start;
+}
+
+/* スクロールバー非表示 */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* フェードイン */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out both;
 }

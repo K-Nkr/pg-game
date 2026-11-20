@@ -123,9 +123,9 @@ export const App: React.FC = () => {
         bestStats={bestStats}
       />
 
-      {/* Main Game Stage Layout */}
-      <main className="flex-1 max-w-6xl w-full mx-auto p-3 sm:p-5 flex flex-col lg:flex-row items-center lg:items-start justify-center gap-6">
-        {/* Left Column: Bowl & Soup & Measure Control */}
+      {/* Main Game Stage Layout - スマホ: 縦1列 / PC: 横2列 */}
+      <main className="flex-1 max-w-6xl w-full mx-auto px-2 py-2 sm:p-5 flex flex-col lg:flex-row items-center lg:items-start justify-center gap-3 sm:gap-6">
+        {/* Bowl & Soup & Measure Control */}
         <div className="w-full lg:w-[460px] shrink-0 flex flex-col items-center">
           <BowlStage
             placedIngredients={placedIngredients}
@@ -139,14 +139,14 @@ export const App: React.FC = () => {
           />
         </div>
 
-        {/* Right Column: Ingredients Palette */}
+        {/* Ingredients Palette */}
         <div className="flex-1 w-full max-w-2xl">
-          <div className="mb-2 flex items-center justify-between px-1">
-            <h2 className="text-sm font-black text-stone-700 flex items-center gap-1.5">
-              <span>🥢 トッピング具材を選ぼう</span>
+          <div className="mb-1.5 flex items-center justify-between px-1">
+            <h2 className="text-xs font-black text-stone-700 flex items-center gap-1">
+              <span>🥢 具材を選ぼう</span>
             </h2>
-            <span className="text-[11px] font-bold text-amber-900 bg-amber-100 px-2.5 py-0.5 rounded-full border border-amber-300">
-              1g＝4円！勘で1,000円 (250g) を目指そう
+            <span className="text-[10px] font-bold text-amber-900 bg-amber-100 px-2 py-0.5 rounded-full border border-amber-300">
+              勘で1,000円（250g）を目指そう
             </span>
           </div>
 

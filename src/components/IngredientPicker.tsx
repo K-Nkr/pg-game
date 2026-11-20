@@ -18,12 +18,12 @@ export const IngredientPicker: React.FC<IngredientPickerProps> = ({
   const [activeTab, setActiveTab] = useState<TabType>('all');
 
   const tabs: { id: TabType; label: string; icon: string }[] = [
-    { id: 'all', label: 'すべて', icon: '🍲' },
-    { id: 'noodle', label: '麺・主食', icon: '🍜' },
-    { id: 'meat', label: '肉・魚介', icon: '🥩' },
+    { id: 'all',       label: 'すべて',    icon: '🍲' },
+    { id: 'noodle',    label: '麺・主食',  icon: '🍜' },
+    { id: 'meat',      label: '肉・魚介',  icon: '🥩' },
     { id: 'processed', label: '練り物・豆', icon: '🥟' },
-    { id: 'veg', label: '野菜', icon: '🥬' },
-    { id: 'mushroom', label: 'キノコ', icon: '🍄' },
+    { id: 'veg',       label: '野菜',      icon: '🥬' },
+    { id: 'mushroom',  label: 'キノコ',    icon: '🍄' },
   ];
 
   const filteredIngredients = INGREDIENTS.filter((item) => {
@@ -43,9 +43,9 @@ export const IngredientPicker: React.FC<IngredientPickerProps> = ({
   };
 
   return (
-    <div className="w-full bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border-2 border-amber-200 p-3 sm:p-4">
-      {/* Category Tabs */}
-      <div className="flex items-center gap-1 sm:gap-2 overflow-x-auto pb-2 scrollbar-none border-b border-stone-200">
+    <div className="w-full bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border-2 border-amber-200 p-2.5">
+      {/* Category Tabs - 横スクロール */}
+      <div className="flex items-center gap-1 overflow-x-auto pb-2 scrollbar-none border-b border-stone-200">
         {tabs.map((tab) => (
           <button
             key={tab.id}
@@ -53,10 +53,10 @@ export const IngredientPicker: React.FC<IngredientPickerProps> = ({
               sound.playClick();
               setActiveTab(tab.id);
             }}
-            className={`flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all border ${
+            className={`flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all border shrink-0 ${
               activeTab === tab.id
-                ? 'bg-red-800 text-amber-200 border-amber-400 shadow-sm scale-102'
-                : 'bg-stone-100 text-stone-600 border-stone-200 hover:bg-stone-200'
+                ? 'bg-red-800 text-amber-200 border-amber-400 shadow-sm'
+                : 'bg-stone-100 text-stone-600 border-stone-200 hover:bg-stone-200 active:bg-stone-300'
             }`}
           >
             <span>{tab.icon}</span>
@@ -65,62 +65,104 @@ export const IngredientPicker: React.FC<IngredientPickerProps> = ({
         ))}
       </div>
 
-      {/* Ingredients Grid - 重さは隠しパラメータ！ */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-3 mt-3 max-h-[380px] overflow-y-auto pr-1">
-        {filteredIngredients.map((item) => {
-          const count = countsMap[item.id] || 0;
+      {/* Ingredients - スマホ: 2行横スクロール / PC: グリッド */}
+      {/* スマホ: ingredient-scroll で2行横スクロール */}
+      <div className="mt-2.5">
+        {/* スマホ向け2行横スクロール */}
+        <div className="sm:hidden ingredient-scroll scrollbar-none" style={{ gridTemplateRows: 'repeat(2, minmax(0, 1fr))' }}>
+          {filteredIngredients.map((item) => {
+            const count = countsMap[item.id] || 0;
+            return (
+              <IngredientCard
+                key={item.id}
+                item={item}
+                count={count}
+                onClick={() => handleCardClick(item)}
+                compact
+              />
+            );
+          })}
+        </div>
 
-          return (
-            <button
-              key={item.id}
-              onClick={() => handleCardClick(item)}
-              className="group relative flex flex-col items-center bg-gradient-to-b from-amber-50/50 to-white hover:from-amber-100/60 hover:to-amber-50 p-2.5 rounded-2xl border border-amber-200/80 hover:border-amber-400 hover:shadow-md transition-all active:scale-95 text-center"
-              title={`${item.name} (${item.nameZh})\n${item.description}`}
-            >
-              {/* Placed count badge */}
-              {count > 0 && (
-                <span className="absolute -top-1.5 -right-1.5 w-6 h-6 rounded-full bg-red-600 text-white font-black text-xs flex items-center justify-center shadow-md border-2 border-white animate-bounce">
-                  {count}
-                </span>
-              )}
-
-              {/* Free SVG image of ingredient */}
-              <div className="w-16 h-16 sm:w-18 sm:h-18 flex items-center justify-center p-1 group-hover:scale-110 transition-transform">
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-full h-full object-contain filter drop-shadow"
-                  loading="lazy"
-                />
-              </div>
-
-              {/* Name (Japanese + Chinese) */}
-              <div className="mt-1 w-full">
-                <span className="block text-xs font-bold text-stone-800 truncate">
-                  {item.name}
-                </span>
-                <span className="block text-[10px] text-stone-400 font-medium truncate">
-                  {item.nameZh}
-                </span>
-              </div>
-
-              {/* Flavor / Texture badge (重さは隠しパラメータなので食感を表示) */}
-              <div className="mt-1.5 w-full">
-                <span className="inline-block w-full py-0.5 px-1 rounded-md bg-amber-100/70 text-amber-900 font-bold text-[10px] truncate border border-amber-200/60">
-                  {item.flavor}
-                </span>
-              </div>
-
-              {/* Plus Overlay Indicator */}
-              <div className="absolute inset-0 bg-amber-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
-                <div className="w-8 h-8 rounded-full bg-red-700 text-white flex items-center justify-center shadow-lg">
-                  <Plus size={18} />
-                </div>
-              </div>
-            </button>
-          );
-        })}
+        {/* PC向けグリッド */}
+        <div className="hidden sm:grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 max-h-[380px] overflow-y-auto pr-1">
+          {filteredIngredients.map((item) => {
+            const count = countsMap[item.id] || 0;
+            return (
+              <IngredientCard
+                key={item.id}
+                item={item}
+                count={count}
+                onClick={() => handleCardClick(item)}
+                compact={false}
+              />
+            );
+          })}
+        </div>
       </div>
     </div>
   );
 };
+
+// 具材カードコンポーネント（compact=スマホ向け小さめ）
+interface CardProps {
+  item: Ingredient;
+  count: number;
+  onClick: () => void;
+  compact: boolean;
+}
+
+const IngredientCard: React.FC<CardProps> = ({ item, count, onClick, compact }) => (
+  <button
+    onClick={onClick}
+    className={`group relative flex flex-col items-center bg-gradient-to-b from-amber-50/50 to-white active:from-amber-100/60 active:to-amber-50 rounded-2xl border border-amber-200/80 active:border-amber-400 active:shadow-md transition-all active:scale-95 text-center ${
+      compact ? 'p-1.5 w-[80px]' : 'p-2.5 hover:from-amber-100/60 hover:to-amber-50 hover:border-amber-400 hover:shadow-md'
+    }`}
+    title={`${item.name} (${item.nameZh})\n${item.description}`}
+  >
+    {/* Placed count badge */}
+    {count > 0 && (
+      <span className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-red-600 text-white font-black text-[10px] flex items-center justify-center shadow-md border-2 border-white animate-bounce z-10">
+        {count}
+      </span>
+    )}
+
+    {/* Ingredient Image */}
+    <div className={`flex items-center justify-center p-0.5 group-active:scale-110 transition-transform ${compact ? 'w-12 h-12' : 'w-16 h-16'}`}>
+      <img
+        src={item.image}
+        alt={item.name}
+        className="w-full h-full object-contain filter drop-shadow"
+        loading="lazy"
+      />
+    </div>
+
+    {/* Name */}
+    <div className="mt-1 w-full">
+      <span className={`block font-bold text-stone-800 truncate ${compact ? 'text-[10px]' : 'text-xs'}`}>
+        {item.name}
+      </span>
+      {!compact && (
+        <span className="block text-[10px] text-stone-400 font-medium truncate">
+          {item.nameZh}
+        </span>
+      )}
+    </div>
+
+    {/* Flavor badge */}
+    <div className="mt-1 w-full">
+      <span className={`inline-block w-full py-0.5 px-1 rounded-md bg-amber-100/70 text-amber-900 font-bold truncate border border-amber-200/60 ${compact ? 'text-[8px]' : 'text-[10px]'}`}>
+        {item.flavor}
+      </span>
+    </div>
+
+    {/* Plus Overlay (PC only) */}
+    {!compact && (
+      <div className="absolute inset-0 bg-amber-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+        <div className="w-7 h-7 rounded-full bg-red-700 text-white flex items-center justify-center shadow-lg">
+          <Plus size={16} />
+        </div>
+      </div>
+    )}
+  </button>
+);
