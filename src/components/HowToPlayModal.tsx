@@ -14,7 +14,7 @@ export const HowToPlayModal: React.FC<HowToPlayModalProps> = ({ onClose }) => {
         <div className="bg-gradient-to-r from-red-800 to-amber-800 p-4 text-white text-center relative border-b-2 border-amber-400">
           <h2 className="text-xl font-black text-amber-200 flex items-center justify-center gap-2">
             <HelpCircle size={22} />
-            <span>麻辣湯100g選手権の遊び方</span>
+            <span>麻辣湯1000円選手権の遊び方</span>
           </h2>
           <button
             onClick={() => {
@@ -29,6 +29,14 @@ export const HowToPlayModal: React.FC<HowToPlayModalProps> = ({ onClose }) => {
 
         {/* Content */}
         <div className="p-5 space-y-4 text-stone-700 text-xs sm:text-sm">
+          {/* Rule Overview */}
+          <div className="bg-red-50 p-3.5 rounded-2xl border-2 border-red-300 text-center">
+            <span className="text-xs text-red-700 font-bold block">【基本ルール】</span>
+            <span className="text-lg font-black text-red-900">
+              1グラム ＝ 4円！ 目標金額は 1,000円（250g）
+            </span>
+          </div>
+
           {/* Step 1 */}
           <div className="flex gap-3 items-start bg-amber-50 p-3 rounded-2xl border border-amber-200">
             <div className="w-7 h-7 rounded-full bg-red-700 text-white font-black flex items-center justify-center shrink-0 text-xs">
@@ -39,7 +47,7 @@ export const HowToPlayModal: React.FC<HowToPlayModalProps> = ({ onClose }) => {
                 お好みのスープを選ぶ！
               </h3>
               <p className="mt-0.5 text-stone-600">
-                定番の中辛、痺れる本格大辛、マイルドな白湯、完熟トマト麻辣から今日のスープを選びます。
+                定番中辛、本格激辛、濃厚白湯、完熟トマト麻辣から今日の気分に合わせて選べます。
               </p>
             </div>
           </div>
@@ -51,11 +59,10 @@ export const HowToPlayModal: React.FC<HowToPlayModalProps> = ({ onClose }) => {
             </div>
             <div>
               <h3 className="font-bold text-stone-900 text-sm">
-                具材を自由にトッピング＆レイアウト！
+                具材を自由にトッピング！
               </h3>
               <p className="mt-0.5 text-stone-600">
-                下のパレットから具材をタップして丼に入れます。具材は自由にドラッグ移動可能！
-                タップすると<strong>回転</strong>や<strong>✨キラキラ最前面エフェクト</strong>、<strong>削除</strong>ができます。
+                パレットから具材をタップしてボウルに盛り付けます。具材をタップして<strong>回転</strong>や<strong>✨キラキラ＆最前面</strong>への配置が可能です。
               </p>
             </div>
           </div>
@@ -67,24 +74,24 @@ export const HowToPlayModal: React.FC<HowToPlayModalProps> = ({ onClose }) => {
             </div>
             <div>
               <h3 className="font-bold text-stone-900 text-sm">
-                重さは隠しパラメータ！目指せピッタリ 100.0g ⚖️
+                重さは隠しパラメータ！目指せピッタリ 1,000円 ⚖️
               </h3>
               <p className="mt-0.5 text-stone-600">
-                各具材の重さは<strong>完全非表示の隠しパラメータ</strong>！本物の麻辣湯のリアルな重量をもとに設定されています。あなたの料理勘を研ぎ澄まして、ピッタリ100.0gの神計量を目指しましょう！
+                具材の重さは秘密！1g＝4円なので、<strong>ピッタリ250.0g盛るとジャスト1,000円</strong>になります！寸分の狂いもなく1,000円を叩き出すと、最高ランク『SSS 神会計麻辣湯仙人』の称号を獲得！
               </p>
             </div>
           </div>
 
           {/* Tips */}
-          <div className="bg-red-50 p-3 rounded-2xl border border-red-200 text-red-900">
-            <h4 className="font-black flex items-center gap-1.5 text-xs">
+          <div className="bg-amber-50 p-3 rounded-2xl border border-amber-300 text-amber-950">
+            <h4 className="font-black flex items-center gap-1.5 text-xs text-red-900">
               <Sparkles size={14} className="text-amber-600" />
-              <span>現実の麻辣湯に基づくヒント</span>
+              <span>1,000円（250g）攻略のヒント</span>
             </h4>
-            <ul className="mt-1 space-y-1 text-[11px] text-red-800 list-disc list-inside">
-              <li>麺（特太タンミョン・中華麺）は1玉で約45〜48g！一気に半分近く占めます。</li>
-              <li>厚切りスパムや牛肉は重量感があり、青梗菜も水分で意外とずっしり。</li>
-              <li>うずらの卵（約11g）やパクチー（約6g）、きくらげ（約10g）は微調整に最適！</li>
+            <ul className="mt-1 space-y-1 text-[11px] text-stone-700 list-disc list-inside">
+              <li>麺（タンミョン・中華麺）は約45〜48g（約180〜192円分）。</li>
+              <li>お肉や青梗菜を数品入れると、大体200g（約800円）近くまで届きます。</li>
+              <li>最後の微調整は、うずらの卵（約11g＝約44円）やパクチー（約6g＝約24円）が勝負の鍵！</li>
             </ul>
           </div>
 
@@ -95,7 +102,7 @@ export const HowToPlayModal: React.FC<HowToPlayModalProps> = ({ onClose }) => {
             }}
             className="w-full py-3 rounded-xl bg-gradient-to-r from-red-700 to-amber-700 hover:from-red-600 hover:to-amber-600 text-white font-black text-sm shadow-md transition-all active:scale-95 border border-amber-300"
           >
-            さっそく遊ぶ！
+            さっそく挑戦する！
           </button>
         </div>
       </div>

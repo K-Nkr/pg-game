@@ -16,12 +16,14 @@ export const ScaleResultModal: React.FC<ScaleResultModalProps> = ({
   onRestart,
 }) => {
   const [measuring, setMeasuring] = useState<boolean>(true);
+  const [displayPrice, setDisplayPrice] = useState<number>(0);
   const [displayWeight, setDisplayWeight] = useState<number>(0);
 
-  // デジタルスケールのカウントアップ測定アニメーション
+  // デジタルスケールのカウントアップ測定アニメーション (重さと金額がリアルタイム連動)
   useEffect(() => {
-    let current = 0;
-    const target = result.totalWeight;
+    let currentWeight = 0;
+    const targetWeight = result.totalWeight;
+    const targetPrice = result.totalPrice;
     const duration = 1800; // 1.8秒
     const startTime = performance.now();
 
@@ -34,21 +36,25 @@ export const ScaleResultModal: React.FC<ScaleResultModalProps> = ({
       const progress = Math.min(elapsed / duration, 1);
       // ease-out cubic
       const ease = 1 - Math.pow(1 - progress, 3);
-      current = Math.round(target * ease * 10) / 10;
-      setDisplayWeight(current);
+      currentWeight = Math.round(targetWeight * ease * 10) / 10;
+      const currentPrice = Math.round(currentWeight * 4);
+
+      setDisplayWeight(currentWeight);
+      setDisplayPrice(currentPrice);
 
       if (progress < 1) {
         requestAnimationFrame(animate);
       } else {
         clearInterval(tickInterval);
-        setDisplayWeight(target);
+        setDisplayWeight(targetWeight);
+        setDisplayPrice(targetPrice);
         setMeasuring(false);
 
-        const isPerfect = result.diff === 0;
+        const isPerfect = result.diffPrice === 0;
         sound.playScaleDone(isPerfect);
 
-        // 好記録（誤差1g以内）なら紙吹雪発射！
-        if (result.diff <= 1.0) {
+        // 好記録（誤差20円以内）なら紙吹雪発射！
+        if (result.diffPrice <= 20) {
           triggerConfetti(isPerfect);
         }
       }
@@ -62,7 +68,7 @@ export const ScaleResultModal: React.FC<ScaleResultModalProps> = ({
   }, [result]);
 
   const triggerConfetti = (isSuper: boolean) => {
-    const count = isSuper ? 200 : 90;
+    const count = isSuper ? 250 : 100;
     const defaults = {
       origin: { y: 0.6 },
     };
@@ -105,13 +111,13 @@ export const ScaleResultModal: React.FC<ScaleResultModalProps> = ({
     sound.playClick();
     const rankEmoji =
       result.rank === 'SSS'
-        ? '🏆【神計量SSS】'
+        ? '🏆【神会計SSS】'
         : result.rank === 'SS'
         ? '✨【SSランク】'
         : result.rank === 'S'
         ? '🌟【Sランク】'
         : '🍜';
-    const text = `${rankEmoji} 麻辣湯100gピッタリ選手権で【${result.totalWeight}g】(誤差±${result.diff}g) を達成！\n称号:『${result.title}』\nスコア: ${result.score.toLocaleString()}点！\n\nあなたもピッタリ100gの麻辣湯を作れるか挑戦してみてね！ #麻辣湯100gチャレンジ #マーラータン`;
+    const text = `${rankEmoji} 麻辣湯1000円ピッタリ選手権（1g＝4円）で【${result.totalPrice}円（${result.totalWeight}g）】(誤差±${result.diffPrice}円) を達成！\n称号:『${result.title}』\nスコア: ${result.score.toLocaleString()}点！\n\nあなたもピッタリ1,000円の麻辣湯を作れるか挑戦してみてね！ #麻辣湯1000円チャレンジ #マーラータン #1g4円`;
     const url = window.location.href;
     const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
       text
@@ -141,10 +147,10 @@ export const ScaleResultModal: React.FC<ScaleResultModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 bg-stone-950/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto animate-fadeIn">
       <div className="relative w-full max-w-lg bg-gradient-to-b from-amber-50 to-stone-100 rounded-3xl shadow-2xl border-4 border-amber-400 overflow-hidden my-auto">
-        {/* Chinese decorative header bar */}
+        {/* Header bar */}
         <div className="bg-gradient-to-r from-red-800 via-red-700 to-amber-800 p-4 text-white text-center relative border-b-2 border-amber-400">
           <h2 className="text-xl sm:text-2xl font-black tracking-wide text-amber-200">
-            {measuring ? '⚖️ 計量中...' : '🧾 お会計・計量結果'}
+            {measuring ? '⚖️ 計量＆お会計中...' : '🧾 お会計レシート・結果発表'}
           </h2>
           <button
             onClick={() => {
@@ -157,52 +163,63 @@ export const ScaleResultModal: React.FC<ScaleResultModalProps> = ({
           </button>
         </div>
 
-        <div className="p-4 sm:p-6 space-y-5">
-          {/* Digital Scale Machine Display (電子はかり) */}
+        <div className="p-4 sm:p-6 space-y-4">
+          {/* Digital Scale Machine Display (電子レジはかり) */}
           <div className="bg-gradient-to-b from-stone-900 to-stone-950 rounded-2xl p-4 sm:p-5 border-4 border-stone-700 shadow-inner text-center relative overflow-hidden">
-            {/* Scale Plate highlight */}
             <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-amber-400/40 to-transparent"></div>
 
-            <span className="text-[11px] font-bold tracking-widest text-stone-400 uppercase">
-              HIGH PRECISION SCALE 100.0g TARGET
-            </span>
+            <div className="flex items-center justify-between text-[11px] font-bold tracking-wider text-stone-400 uppercase border-b border-stone-800 pb-1 mb-2">
+              <span>RATE: 1g = 4円</span>
+              <span className="text-amber-400">TARGET: 1,000円 (250g)</span>
+            </div>
 
-            {/* Big LED Numbers */}
-            <div className="my-2 flex items-baseline justify-center gap-1 font-mono-scale">
+            {/* Big LED Numbers (金額メイン表示) */}
+            <div className="my-1 flex items-baseline justify-center gap-1 font-mono-scale">
               <span
                 className={`text-5xl sm:text-6xl font-black tracking-tighter ${
                   measuring
                     ? 'text-amber-400 animate-pulse'
-                    : result.diff === 0
-                    ? 'text-emerald-400 drop-shadow-[0_0_15px_rgba(52,211,153,0.8)]'
-                    : result.diff <= 1.0
+                    : result.diffPrice === 0
+                    ? 'text-emerald-400 drop-shadow-[0_0_18px_rgba(52,211,153,0.9)]'
+                    : result.diffPrice <= 20
                     ? 'text-yellow-300 drop-shadow-[0_0_12px_rgba(253,224,71,0.7)]'
                     : 'text-amber-400'
                 }`}
               >
-                {displayWeight.toFixed(1)}
+                {displayPrice.toLocaleString()}
               </span>
-              <span className="text-2xl sm:text-3xl font-bold text-stone-400">g</span>
+              <span className="text-2xl sm:text-3xl font-bold text-stone-300">円</span>
+            </div>
+
+            {/* Sub-LED: Weight display */}
+            <div className="text-stone-400 font-mono text-sm sm:text-base font-bold flex items-center justify-center gap-2">
+              <span>重量:</span>
+              <span className="text-white font-black">{displayWeight.toFixed(1)}</span>
+              <span>g</span>
             </div>
 
             {/* Difference / status indicator */}
             {!measuring && (
-              <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold mt-1 bg-stone-800 text-stone-200 border border-stone-700">
-                {result.diff === 0 ? (
+              <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold mt-2 bg-stone-800 text-stone-200 border border-stone-700">
+                {result.diffPrice === 0 ? (
                   <span className="text-emerald-400 flex items-center gap-1">
-                    <Sparkles size={14} /> ピッタリ 100.0g 達成！
+                    <Sparkles size={14} /> 奇跡のピッタリ 1,000円 (250.0g) 達成！！
                   </span>
                 ) : (
                   <span>
                     目標まで{' '}
                     <strong
                       className={
-                        result.totalWeight > 100 ? 'text-red-400' : 'text-blue-400'
+                        result.totalPrice > 1000 ? 'text-red-400' : 'text-blue-400'
                       }
                     >
-                      {result.totalWeight > 100 ? '+' : '-'}
-                      {result.diff}g
+                      {result.totalPrice > 1000 ? '+' : '-'}
+                      {result.diffPrice}円
                     </strong>
+                    <span className="text-stone-400 text-[10px] ml-1">
+                      ({result.totalWeight > 250 ? '+' : '-'}
+                      {result.diffWeight}g)
+                    </span>
                   </span>
                 )}
               </div>
@@ -254,27 +271,34 @@ export const ScaleResultModal: React.FC<ScaleResultModalProps> = ({
                 </p>
               </div>
 
-              {/* Receipt Details (レシート風明細) */}
-              <div className="bg-white p-3 rounded-2xl border border-dashed border-stone-300 font-mono text-xs text-stone-700">
-                <div className="text-center font-bold text-stone-500 border-b border-dashed border-stone-300 pb-1.5 mb-2">
-                  🍲 麻辣湯 トッピング明細 🍲
+              {/* Receipt Details (本物の麻辣湯屋さん風レシート明細) */}
+              <div className="bg-white p-3.5 rounded-2xl border border-dashed border-stone-300 font-mono text-xs text-stone-700">
+                <div className="text-center font-bold text-stone-600 border-b border-dashed border-stone-300 pb-1.5 mb-2">
+                  🍲 麻辣湯 量り売りお会計伝票 (1g＝4円) 🍲
                 </div>
-                <div className="max-h-36 overflow-y-auto space-y-1 pr-1">
+                <div className="max-h-36 overflow-y-auto space-y-1.5 pr-1">
                   {result.items.map((item, index) => (
                     <div
                       key={item.instanceId || index}
                       className="flex items-center justify-between text-[11px]"
                     >
-                      <span className="truncate pr-2">{item.ingredient.name}</span>
-                      <span className="font-bold text-stone-900 whitespace-nowrap">
-                        {item.actualWeight.toFixed(1)}g
-                      </span>
+                      <span className="truncate pr-2 font-medium">{item.ingredient.name}</span>
+                      <div className="text-right shrink-0">
+                        <span className="text-stone-400 mr-2">{item.actualWeight.toFixed(1)}g</span>
+                        <span className="font-bold text-stone-900">{item.price}円</span>
+                      </div>
                     </div>
                   ))}
                 </div>
-                <div className="border-t border-dashed border-stone-300 pt-1.5 mt-2 flex justify-between font-bold text-xs text-red-950">
-                  <span>合計重量 ({result.items.length}品):</span>
-                  <span>{result.totalWeight.toFixed(1)}g</span>
+                <div className="border-t border-dashed border-stone-300 pt-2 mt-2 space-y-0.5">
+                  <div className="flex justify-between text-xs text-stone-600">
+                    <span>総重量 ({result.items.length}品):</span>
+                    <span className="font-bold">{result.totalWeight.toFixed(1)}g</span>
+                  </div>
+                  <div className="flex justify-between font-black text-sm text-red-950 pt-0.5">
+                    <span>お会計合計:</span>
+                    <span>{result.totalPrice.toLocaleString()}円</span>
+                  </div>
                 </div>
               </div>
 
@@ -298,7 +322,7 @@ export const ScaleResultModal: React.FC<ScaleResultModalProps> = ({
                   className="w-full sm:flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-red-700 to-amber-700 hover:from-red-600 hover:to-amber-600 text-white font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 shadow-md transition-all active:scale-95 border border-amber-300"
                 >
                   <RefreshCw size={16} />
-                  <span>もう一度作る！</span>
+                  <span>もう一度盛る！</span>
                 </button>
               </div>
             </div>

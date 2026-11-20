@@ -50,6 +50,7 @@ export const App: React.FC = () => {
     // 個体ごとの重さ計算（基本重量 ± ジッター）
     const jitter = (Math.random() * 2 - 1) * ingredient.weightJitter;
     const actualWeight = Math.round((ingredient.baseWeight + jitter) * 10) / 10;
+    const price = Math.round(actualWeight * 4);
 
     const maxZ = Math.max(0, ...placedIngredients.map((p) => p.zIndex));
 
@@ -61,6 +62,7 @@ export const App: React.FC = () => {
       rotation: Math.round(Math.random() * 360),
       scale: 1,
       actualWeight,
+      price,
       zIndex: maxZ + 1,
     };
 
@@ -143,8 +145,8 @@ export const App: React.FC = () => {
             <h2 className="text-sm font-black text-stone-700 flex items-center gap-1.5">
               <span>🥢 トッピング具材を選ぼう</span>
             </h2>
-            <span className="text-[11px] font-bold text-amber-900 bg-amber-100 px-2 py-0.5 rounded-full border border-amber-300">
-              重さは秘密！勘で100gを目指そう
+            <span className="text-[11px] font-bold text-amber-900 bg-amber-100 px-2.5 py-0.5 rounded-full border border-amber-300">
+              1g＝4円！勘で1,000円 (250g) を目指そう
             </span>
           </div>
 
@@ -157,7 +159,7 @@ export const App: React.FC = () => {
 
       {/* Footer */}
       <footer className="w-full text-center py-4 text-xs text-stone-400 border-t border-stone-200">
-        <p>🍲 麻辣湯 100g ピッタリ選手権 | 目指せ神計量100.0g</p>
+        <p>🍲 麻辣湯 1,000円ピッタリ選手権 (1g＝4円) | 目指せ神会計！</p>
       </footer>
 
       {/* Modals */}

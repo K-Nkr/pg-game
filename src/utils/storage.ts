@@ -1,11 +1,12 @@
 import { GameResult } from '../types/game';
 
-const STORAGE_KEY = 'malatang_100g_history_v1';
-const BEST_KEY = 'malatang_100g_best_v1';
+const STORAGE_KEY = 'malatang_1000yen_history_v2';
+const BEST_KEY = 'malatang_1000yen_best_v2';
 
 export interface BestStats {
   bestScore: number;
-  minDiff: number;
+  minDiffPrice: number;
+  minDiffWeight: number;
   perfectCount: number;
   playCount: number;
 }
@@ -20,8 +21,9 @@ export function saveGameResult(result: GameResult): void {
     const currentBest = getBestStats();
     const updatedBest: BestStats = {
       bestScore: Math.max(currentBest.bestScore, result.score),
-      minDiff: Math.min(currentBest.minDiff, result.diff),
-      perfectCount: currentBest.perfectCount + (result.diff === 0 ? 1 : 0),
+      minDiffPrice: Math.min(currentBest.minDiffPrice, result.diffPrice),
+      minDiffWeight: Math.min(currentBest.minDiffWeight, result.diffWeight),
+      perfectCount: currentBest.perfectCount + (result.diffPrice === 0 ? 1 : 0),
       playCount: currentBest.playCount + 1,
     };
     localStorage.setItem(BEST_KEY, JSON.stringify(updatedBest));
@@ -46,14 +48,16 @@ export function getBestStats(): BestStats {
       ? JSON.parse(raw)
       : {
           bestScore: 0,
-          minDiff: 999,
+          minDiffPrice: 9999,
+          minDiffWeight: 999,
           perfectCount: 0,
           playCount: 0,
         };
   } catch {
     return {
       bestScore: 0,
-      minDiff: 999,
+      minDiffPrice: 9999,
+      minDiffWeight: 999,
       perfectCount: 0,
       playCount: 0,
     };

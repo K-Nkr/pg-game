@@ -29,17 +29,20 @@ export const Header: React.FC<HeaderProps> = ({
           <div>
             <div className="flex items-center gap-2">
               <span className="text-xs bg-amber-400 text-red-950 font-black px-2 py-0.5 rounded-full tracking-wider uppercase">
-                Málàtàng 100g
+                1g＝4円
+              </span>
+              <span className="text-xs bg-red-950/80 text-amber-300 font-bold px-2 py-0.5 rounded-full border border-amber-400/40">
+                目標 1,000円 (250g)
               </span>
               {bestStats.perfectCount > 0 && (
                 <span className="text-xs bg-yellow-300 text-red-900 font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
                   <Sparkles size={12} className="text-amber-700" />
-                  100g達成: {bestStats.perfectCount}回
+                  1,000円達成: {bestStats.perfectCount}回
                 </span>
               )}
             </div>
             <h1 className="text-xl sm:text-2xl font-black tracking-tight text-amber-100 drop-shadow">
-              麻辣湯 100g ピッタリ選手権
+              麻辣湯 1,000円ピッタリ選手権
             </h1>
           </div>
         </div>
@@ -51,9 +54,9 @@ export const Header: React.FC<HeaderProps> = ({
             <div className="hidden sm:flex items-center gap-1.5 bg-red-900/80 px-3 py-1.5 rounded-xl border border-amber-400/40 text-xs font-bold text-amber-200">
               <Award size={15} className="text-amber-400" />
               <span>最高: {bestStats.bestScore.toLocaleString()}点</span>
-              {bestStats.minDiff < 999 && (
+              {bestStats.minDiffPrice < 9999 && (
                 <span className="text-amber-300 font-mono">
-                  (誤差±{bestStats.minDiff}g)
+                  (誤差±{bestStats.minDiffPrice}円)
                 </span>
               )}
             </div>

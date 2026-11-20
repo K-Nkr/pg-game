@@ -24,6 +24,7 @@ export interface PlacedIngredient {
   rotation: number; // 0..360
   scale: number;
   actualWeight: number;
+  price: number; // actualWeight * 4
   zIndex: number;
 }
 
@@ -41,7 +42,9 @@ export interface SoupType {
 
 export interface GameResult {
   totalWeight: number;
-  diff: number;
+  totalPrice: number;
+  diffWeight: number;
+  diffPrice: number;
   score: number;
   rank: 'SSS' | 'SS' | 'S' | 'A' | 'B' | 'C' | 'D';
   title: string;
@@ -50,9 +53,8 @@ export interface GameResult {
   items: {
     ingredient: Ingredient;
     actualWeight: number;
+    price: number;
     instanceId: string;
   }[];
   date: string;
 }
-
-export type GameMode = 'normal' | 'pro'; // normal: 秤のヒントなし / pro: 一切のガイドなし

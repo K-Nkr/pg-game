@@ -213,7 +213,7 @@ export const BowlStage: React.FC<BowlStageProps> = ({
                   下のパレットから具材をタップ！
                 </p>
                 <p className="text-amber-200 text-xs mt-1 drop-shadow font-bold">
-                  重さは秘密…勘を頼りに100gを目指そう！ ⚖️
+                  1g＝4円！勘を頼りにピッタリ1,000円（250g）を目指そう！ ⚖️
                 </p>
               </div>
             )}
@@ -316,13 +316,16 @@ export const BowlStage: React.FC<BowlStageProps> = ({
 
       {/* Bowl Sub-bar (具材カウント & アクション) */}
       <div className="flex items-center justify-between w-full max-w-md px-3 mt-1 gap-2">
-        {/* Ingredient Count Badge (重さは隠しパラメータ！目標100gのみ表示) */}
+        {/* Ingredient Count Badge (重さは隠しパラメータ！目標1000円のみ表示) */}
         <div className="flex items-center gap-1.5 text-xs font-bold text-stone-700 bg-amber-100/90 px-3.5 py-1.5 rounded-xl border border-amber-300/70 shadow-xs">
           <span>具材:</span>
           <span className="text-red-700 font-black text-sm">{placedIngredients.length}</span>
           <span>品</span>
           <span className="text-[11px] text-amber-900 border-l border-amber-300/80 pl-2 font-black">
-            目標: 100.0g ⚖️
+            目標: 1,000円 (250g)
+          </span>
+          <span className="text-[10px] text-stone-500 hidden sm:inline">
+            (1g=4円)
           </span>
         </div>
 
@@ -358,7 +361,7 @@ export const BowlStage: React.FC<BowlStageProps> = ({
           }`}
         >
           <Scale size={22} className="text-red-950" />
-          <span>計量する！（お会計・完成）</span>
+          <span>計量＆お会計する！（目標1,000円）</span>
         </button>
       </div>
     </div>

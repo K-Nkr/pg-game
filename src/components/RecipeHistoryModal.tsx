@@ -50,11 +50,11 @@ export const RecipeHistoryModal: React.FC<RecipeHistoryModalProps> = ({
             <div className="bg-amber-50 p-2.5 rounded-xl border border-amber-200">
               <span className="text-[10px] text-stone-500 font-bold block">最小誤差</span>
               <span className="text-lg font-black text-amber-800">
-                {bestStats.minDiff === 999 ? '-' : `±${bestStats.minDiff}g`}
+                {bestStats.minDiffPrice === 9999 ? '-' : `±${bestStats.minDiffPrice}円`}
               </span>
             </div>
             <div className="bg-amber-50 p-2.5 rounded-xl border border-amber-200">
-              <span className="text-[10px] text-stone-500 font-bold block">100g達成回数</span>
+              <span className="text-[10px] text-stone-500 font-bold block">1,000円達成</span>
               <span className="text-lg font-black text-emerald-700">
                 {bestStats.perfectCount}回
               </span>
@@ -91,7 +91,7 @@ export const RecipeHistoryModal: React.FC<RecipeHistoryModalProps> = ({
 
             {history.length === 0 ? (
               <div className="py-8 text-center text-stone-400 text-xs">
-                まだ履歴がありません。麻辣湯を作ってみよう！
+                まだ履歴がありません。1,000円麻辣湯に挑戦しよう！
               </div>
             ) : (
               <div className="max-h-60 overflow-y-auto space-y-2 pr-1">
@@ -115,10 +115,10 @@ export const RecipeHistoryModal: React.FC<RecipeHistoryModalProps> = ({
                     </div>
                     <div className="text-right">
                       <div className="font-black text-sm text-stone-900 font-mono">
-                        {item.totalWeight.toFixed(1)}g
+                        {item.totalPrice.toLocaleString()}円
                       </div>
-                      <div className="text-[10px] text-red-600 font-bold">
-                        {item.score.toLocaleString()}点
+                      <div className="text-[10px] text-stone-500 font-bold">
+                        {item.totalWeight.toFixed(1)}g ({item.score.toLocaleString()}点)
                       </div>
                     </div>
                   </div>
