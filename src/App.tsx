@@ -6,7 +6,7 @@ import { ScaleResultModal } from './components/ScaleResultModal';
 import { HowToPlayModal } from './components/HowToPlayModal';
 import { RecipeHistoryModal } from './components/RecipeHistoryModal';
 import { INGREDIENTS, SOUP_TYPES } from './data/ingredients';
-import { Ingredient, PlacedIngredient, SoupType, GameMode, GameResult } from './types/game';
+import { Ingredient, PlacedIngredient, SoupType, GameResult } from './types/game';
 import { sound } from './utils/audio';
 import { calculateScore } from './utils/scoring';
 import { getBestStats, getGameHistory, saveGameResult, BestStats } from './utils/storage';
@@ -14,7 +14,6 @@ import { getBestStats, getGameHistory, saveGameResult, BestStats } from './utils
 export const App: React.FC = () => {
   const [placedIngredients, setPlacedIngredients] = useState<PlacedIngredient[]>([]);
   const [selectedSoup, setSelectedSoup] = useState<SoupType>(SOUP_TYPES[0]);
-  const [gameMode, setGameMode] = useState<GameMode>('normal');
   const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
 
   // Modals state
@@ -37,11 +36,6 @@ export const App: React.FC = () => {
     setSoundEnabled(next);
     sound.enabled = next;
     if (next) sound.playClick();
-  };
-
-  // モード切り替え (ノーマル / プロ)
-  const handleToggleMode = () => {
-    setGameMode((prev) => (prev === 'normal' ? 'pro' : 'normal'));
   };
 
   // 具材をボウルに追加
@@ -122,8 +116,6 @@ export const App: React.FC = () => {
       <Header
         soundEnabled={soundEnabled}
         onToggleSound={handleToggleSound}
-        gameMode={gameMode}
-        onToggleMode={handleToggleMode}
         onOpenHowTo={() => setShowHowTo(true)}
         onOpenHistory={() => setShowHistory(true)}
         bestStats={bestStats}
@@ -142,7 +134,6 @@ export const App: React.FC = () => {
             onRemoveIngredient={handleRemoveIngredient}
             onClearBowl={handleClearBowl}
             onMeasureBowl={handleMeasureBowl}
-            gameMode={gameMode}
           />
         </div>
 
@@ -152,22 +143,21 @@ export const App: React.FC = () => {
             <h2 className="text-sm font-black text-stone-700 flex items-center gap-1.5">
               <span>🥢 トッピング具材を選ぼう</span>
             </h2>
-            <span className="text-[11px] font-bold text-stone-500">
-              タップでボウルに追加
+            <span className="text-[11px] font-bold text-amber-900 bg-amber-100 px-2 py-0.5 rounded-full border border-amber-300">
+              重さは秘密！勘で100gを目指そう
             </span>
           </div>
 
           <IngredientPicker
             onAddIngredient={handleAddIngredient}
             placedIngredients={placedIngredients}
-            gameMode={gameMode}
           />
         </div>
       </main>
 
       {/* Footer */}
       <footer className="w-full text-center py-4 text-xs text-stone-400 border-t border-stone-200">
-        <p>🍲 麻辣湯 100g ピッタリ選手権 | トッピング計量ゲーム</p>
+        <p>🍲 麻辣湯 100g ピッタリ選手権 | 目指せ神計量100.0g</p>
       </footer>
 
       {/* Modals */}

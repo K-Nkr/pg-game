@@ -1,14 +1,11 @@
 import React from 'react';
 import { Volume2, VolumeX, HelpCircle, History, Sparkles, Award } from 'lucide-react';
 import { sound } from '../utils/audio';
-import { GameMode } from '../types/game';
 import { BestStats } from '../utils/storage';
 
 interface HeaderProps {
   soundEnabled: boolean;
   onToggleSound: () => void;
-  gameMode: GameMode;
-  onToggleMode: () => void;
   onOpenHowTo: () => void;
   onOpenHistory: () => void;
   bestStats: BestStats;
@@ -17,8 +14,6 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({
   soundEnabled,
   onToggleSound,
-  gameMode,
-  onToggleMode,
   onOpenHowTo,
   onOpenHistory,
   bestStats,
@@ -64,33 +59,18 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
           )}
 
-          {/* Mode Switch (Normal / Pro) */}
-          <button
-            onClick={() => {
-              sound.playClick();
-              onToggleMode();
-            }}
-            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all shadow-sm flex items-center gap-1 border ${
-              gameMode === 'pro'
-                ? 'bg-purple-900 text-purple-200 border-purple-400 hover:bg-purple-800'
-                : 'bg-amber-500 text-stone-900 border-amber-300 hover:bg-amber-400'
-            }`}
-            title="モード切り替え"
-          >
-            <span>{gameMode === 'pro' ? '🔥 激辛プロ(非表示)' : '🍜 ノーマル(目安表示)'}</span>
-          </button>
-
           {/* How to Play */}
           <button
             onClick={() => {
               sound.playClick();
               onOpenHowTo();
             }}
-            className="p-2 bg-red-900/60 hover:bg-red-900 rounded-xl text-amber-200 border border-amber-400/30 transition-all"
+            className="p-2 bg-red-900/60 hover:bg-red-900 rounded-xl text-amber-200 border border-amber-400/30 transition-all flex items-center gap-1 text-xs font-bold"
             title="遊び方"
             aria-label="遊び方"
           >
             <HelpCircle size={18} />
+            <span className="hidden sm:inline">遊び方</span>
           </button>
 
           {/* History */}
@@ -99,11 +79,12 @@ export const Header: React.FC<HeaderProps> = ({
               sound.playClick();
               onOpenHistory();
             }}
-            className="p-2 bg-red-900/60 hover:bg-red-900 rounded-xl text-amber-200 border border-amber-400/30 transition-all"
+            className="p-2 bg-red-900/60 hover:bg-red-900 rounded-xl text-amber-200 border border-amber-400/30 transition-all flex items-center gap-1 text-xs font-bold"
             title="注文履歴・記録"
             aria-label="履歴"
           >
             <History size={18} />
+            <span className="hidden sm:inline">履歴</span>
           </button>
 
           {/* Sound Toggle */}

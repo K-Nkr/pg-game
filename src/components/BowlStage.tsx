@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Trash2, RotateCw, Sparkles, Scale, RefreshCw } from 'lucide-react';
-import { PlacedIngredient, Ingredient, SoupType, GameMode } from '../types/game';
+import { PlacedIngredient, Ingredient, SoupType } from '../types/game';
 import { SOUP_TYPES } from '../data/ingredients';
 import { sound } from '../utils/audio';
 
@@ -13,7 +13,6 @@ interface BowlStageProps {
   onRemoveIngredient: (instanceId: string) => void;
   onClearBowl: () => void;
   onMeasureBowl: () => void;
-  gameMode: GameMode;
 }
 
 export const BowlStage: React.FC<BowlStageProps> = ({
@@ -25,12 +24,14 @@ export const BowlStage: React.FC<BowlStageProps> = ({
   onRemoveIngredient,
   onClearBowl,
   onMeasureBowl,
-  gameMode,
 }) => {
   const bowlRef = useRef<HTMLDivElement>(null);
   const [selectedInstanceId, setSelectedInstanceId] = useState<string | null>(null);
   const [draggingId, setDraggingId] = useState<string | null>(null);
   const [dragOffset, setDragOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+
+  // キラキラエフェクトの表示状態管理 (instanceId -> boolean)
+  const [sparklingId, setSparklingId] = useState<string | null>(null);
 
   // 丼内タップで選択解除
   const handleBowlBackgroundClick = (e: React.MouseEvent) => {
@@ -123,11 +124,20 @@ export const BowlStage: React.FC<BowlStageProps> = ({
     });
   };
 
-  // 最前面へ持ってくる
-  const handleBringToFront = (instanceId: string) => {
+  // キラキラマーク押下アクション（キラキラ演出＋最前面へ！）
+  const handleSparkleAction = (instanceId: string) => {
+    // 1. キラキラ音を鳴らす
+    sound.playSparkle();
+
+    // 2. 最前面へ移動
     const maxZ = Math.max(0, ...placedIngredients.map((p) => p.zIndex));
-    onUpdateIngredient(instanceId, { zIndex: maxZ + 1 });
-    sound.playClick();
+    onUpdateIngredient(instanceId, { zIndex: maxZ + 2 });
+
+    // 3. キラキラ星パーティクルアニメーションをトリガー
+    setSparklingId(instanceId);
+    setTimeout(() => {
+      setSparklingId(null);
+    }, 800);
   };
 
   return (
@@ -203,7 +213,7 @@ export const BowlStage: React.FC<BowlStageProps> = ({
                   下のパレットから具材をタップ！
                 </p>
                 <p className="text-amber-200 text-xs mt-1 drop-shadow font-bold">
-                  目指せピッタリ 100g ⚖️
+                  重さは秘密…勘を頼りに100gを目指そう！ ⚖️
                 </p>
               </div>
             )}
@@ -215,6 +225,7 @@ export const BowlStage: React.FC<BowlStageProps> = ({
 
               const isSelected = selectedInstanceId === item.instanceId;
               const isBeingDragged = draggingId === item.instanceId;
+              const isSparkling = sparklingId === item.instanceId;
 
               return (
                 <div
@@ -226,11 +237,11 @@ export const BowlStage: React.FC<BowlStageProps> = ({
                     left: `${item.x}px`,
                     top: `${item.y}px`,
                     transform: `translate(-50%, -50%) rotate(${item.rotation}deg) scale(${
-                      (def.defaultScale || 1) * (isBeingDragged ? 1.15 : 1)
+                      (def.defaultScale || 1) * (isBeingDragged ? 1.15 : isSparkling ? 1.2 : 1)
                     })`,
-                    zIndex: item.zIndex + (isSelected ? 50 : 0),
+                    zIndex: item.zIndex + (isSelected ? 20 : 0),
                     cursor: isBeingDragged ? 'grabbing' : 'grab',
-                    transition: isBeingDragged ? 'none' : 'transform 0.15s ease-out',
+                    transition: isBeingDragged ? 'none' : 'transform 0.18s cubic-bezier(0.16, 1, 0.3, 1)',
                   }}
                   className={`group select-none touch-none ${
                     isSelected ? 'ring-2 ring-amber-300 ring-offset-2 ring-offset-transparent rounded-full' : ''
@@ -243,38 +254,54 @@ export const BowlStage: React.FC<BowlStageProps> = ({
                     draggable={false}
                   />
 
+                  {/* Sparkle Particle Overlay (キラキラマークを押した時の豪華エフェクト) */}
+                  {isSparkling && (
+                    <div className="absolute inset-0 pointer-events-none flex items-center justify-center animate-sparkle">
+                      <span className="text-3xl filter drop-shadow-[0_0_8px_rgba(251,191,36,1)]">✨</span>
+                      <span className="absolute -top-3 -right-2 text-xl text-yellow-300">⭐</span>
+                      <span className="absolute -bottom-2 -left-2 text-xl text-amber-300">🌟</span>
+                    </div>
+                  )}
+
                   {/* Selected Ingredient Quick Controls Bubble */}
                   {isSelected && (
                     <div
-                      className="absolute -top-10 left-1/2 -translate-x-1/2 flex items-center gap-1 bg-stone-900/90 text-white px-2 py-1 rounded-full shadow-xl border border-amber-400 text-xs z-50 pointer-events-auto"
+                      className="absolute -top-11 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-stone-900/95 text-white px-2.5 py-1.5 rounded-full shadow-2xl border border-amber-400 text-xs z-50 pointer-events-auto backdrop-blur-md"
                       onClick={(e) => e.stopPropagation()}
                     >
                       {/* Rotate */}
                       <button
                         onClick={() => handleRotate(item.instanceId, item.rotation)}
-                        className="p-1 hover:text-amber-300 transition-colors"
+                        className="p-1 hover:text-amber-300 transition-colors flex items-center justify-center"
                         title="回転"
+                        aria-label="回転"
                       >
                         <RotateCw size={14} />
                       </button>
-                      <span className="w-px h-3 bg-stone-600"></span>
-                      {/* Layer Up */}
+
+                      <span className="w-px h-3.5 bg-stone-600"></span>
+
+                      {/* Sparkle / Bring to Front (キラキラマーク✨) */}
                       <button
-                        onClick={() => handleBringToFront(item.instanceId)}
-                        className="p-1 hover:text-amber-300 transition-colors"
-                        title="前面へ"
+                        onClick={() => handleSparkleAction(item.instanceId)}
+                        className="p-1 text-amber-300 hover:text-yellow-200 transition-transform active:scale-125 flex items-center justify-center animate-pulse"
+                        title="✨ キラキラ＆一番上にする"
+                        aria-label="キラキラ＆最前面へ"
                       >
-                        <Sparkles size={14} />
+                        <Sparkles size={15} className="fill-amber-300/30" />
                       </button>
-                      <span className="w-px h-3 bg-stone-600"></span>
+
+                      <span className="w-px h-3.5 bg-stone-600"></span>
+
                       {/* Remove */}
                       <button
                         onClick={() => {
                           sound.playRemove();
                           onRemoveIngredient(item.instanceId);
                         }}
-                        className="p-1 text-red-400 hover:text-red-300 transition-colors"
+                        className="p-1 text-red-400 hover:text-red-300 transition-colors flex items-center justify-center"
                         title="具材を削除"
+                        aria-label="削除"
                       >
                         <Trash2 size={14} />
                       </button>
@@ -289,16 +316,14 @@ export const BowlStage: React.FC<BowlStageProps> = ({
 
       {/* Bowl Sub-bar (具材カウント & アクション) */}
       <div className="flex items-center justify-between w-full max-w-md px-3 mt-1 gap-2">
-        {/* Ingredient Count Badge */}
-        <div className="flex items-center gap-1.5 text-xs font-bold text-stone-700 bg-amber-100/80 px-3 py-1.5 rounded-xl border border-amber-300/60 shadow-xs">
+        {/* Ingredient Count Badge (重さは隠しパラメータ！目標100gのみ表示) */}
+        <div className="flex items-center gap-1.5 text-xs font-bold text-stone-700 bg-amber-100/90 px-3.5 py-1.5 rounded-xl border border-amber-300/70 shadow-xs">
           <span>具材:</span>
           <span className="text-red-700 font-black text-sm">{placedIngredients.length}</span>
           <span>品</span>
-          {gameMode === 'normal' && (
-            <span className="text-[11px] text-stone-500 border-l border-amber-300 pl-2">
-              目標: 100g
-            </span>
-          )}
+          <span className="text-[11px] text-amber-900 border-l border-amber-300/80 pl-2 font-black">
+            目標: 100.0g ⚖️
+          </span>
         </div>
 
         {/* Clear Bowl Button */}

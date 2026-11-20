@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { Plus } from 'lucide-react';
-import { Ingredient, IngredientCategory, GameMode, PlacedIngredient } from '../types/game';
+import { Ingredient, IngredientCategory, PlacedIngredient } from '../types/game';
 import { INGREDIENTS } from '../data/ingredients';
 import { sound } from '../utils/audio';
 
 interface IngredientPickerProps {
   onAddIngredient: (ingredient: Ingredient) => void;
   placedIngredients: PlacedIngredient[];
-  gameMode: GameMode;
 }
 
 type TabType = 'all' | IngredientCategory;
@@ -15,17 +14,16 @@ type TabType = 'all' | IngredientCategory;
 export const IngredientPicker: React.FC<IngredientPickerProps> = ({
   onAddIngredient,
   placedIngredients,
-  gameMode,
 }) => {
   const [activeTab, setActiveTab] = useState<TabType>('all');
 
   const tabs: { id: TabType; label: string; icon: string }[] = [
     { id: 'all', label: 'すべて', icon: '🍲' },
-    { id: 'veg', label: '野菜', icon: '🥬' },
+    { id: 'noodle', label: '麺・主食', icon: '🍜' },
     { id: 'meat', label: '肉・魚介', icon: '🥩' },
     { id: 'processed', label: '練り物・豆', icon: '🥟' },
+    { id: 'veg', label: '野菜', icon: '🥬' },
     { id: 'mushroom', label: 'キノコ', icon: '🍄' },
-    { id: 'noodle', label: '麺・主食', icon: '🍜' },
   ];
 
   const filteredIngredients = INGREDIENTS.filter((item) => {
@@ -67,7 +65,7 @@ export const IngredientPicker: React.FC<IngredientPickerProps> = ({
         ))}
       </div>
 
-      {/* Ingredients Grid */}
+      {/* Ingredients Grid - 重さは隠しパラメータ！ */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-3 mt-3 max-h-[380px] overflow-y-auto pr-1">
         {filteredIngredients.map((item) => {
           const count = countsMap[item.id] || 0;
@@ -77,6 +75,7 @@ export const IngredientPicker: React.FC<IngredientPickerProps> = ({
               key={item.id}
               onClick={() => handleCardClick(item)}
               className="group relative flex flex-col items-center bg-gradient-to-b from-amber-50/50 to-white hover:from-amber-100/60 hover:to-amber-50 p-2.5 rounded-2xl border border-amber-200/80 hover:border-amber-400 hover:shadow-md transition-all active:scale-95 text-center"
+              title={`${item.name} (${item.nameZh})\n${item.description}`}
             >
               {/* Placed count badge */}
               {count > 0 && (
@@ -105,13 +104,10 @@ export const IngredientPicker: React.FC<IngredientPickerProps> = ({
                 </span>
               </div>
 
-              {/* Flavor / Weight tag */}
-              <div className="mt-1 flex items-center justify-between w-full text-[10px] gap-1">
-                <span className="px-1.5 py-0.5 rounded-md bg-stone-100 text-stone-600 font-bold truncate">
+              {/* Flavor / Texture badge (重さは隠しパラメータなので食感を表示) */}
+              <div className="mt-1.5 w-full">
+                <span className="inline-block w-full py-0.5 px-1 rounded-md bg-amber-100/70 text-amber-900 font-bold text-[10px] truncate border border-amber-200/60">
                   {item.flavor}
-                </span>
-                <span className="px-1.5 py-0.5 rounded-md bg-red-50 text-red-700 font-black">
-                  {gameMode === 'normal' ? `約${item.baseWeight}g` : '???g'}
                 </span>
               </div>
 

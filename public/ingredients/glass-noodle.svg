@@ -1,41 +1,100 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
   <defs>
-    <linearGradient id="noodleGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
-      <stop offset="35%" stop-color="#fed7aa" stop-opacity="0.65"/>
-      <stop offset="70%" stop-color="#fdba74" stop-opacity="0.5"/>
-      <stop offset="100%" stop-color="#ea580c" stop-opacity="0.4"/>
+    <!-- Translucent Amber Gelatinous Noodle Body -->
+    <linearGradient id="noodleBody1" x1="10%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%" stop-color="#fff7ed" stop-opacity="0.95"/>
+      <stop offset="25%" stop-color="#fed7aa" stop-opacity="0.85"/>
+      <stop offset="60%" stop-color="#fb923c" stop-opacity="0.7"/>
+      <stop offset="90%" stop-color="#ea580c" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#9a3412" stop-opacity="0.75"/>
     </linearGradient>
-    <linearGradient id="noodleGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+
+    <linearGradient id="noodleBody2" x1="100%" y1="10%" x2="0%" y2="90%">
+      <stop offset="0%" stop-color="#ffedd5" stop-opacity="0.95"/>
+      <stop offset="30%" stop-color="#fdba74" stop-opacity="0.8"/>
+      <stop offset="70%" stop-color="#f97316" stop-opacity="0.65"/>
+      <stop offset="100%" stop-color="#c2410c" stop-opacity="0.75"/>
+    </linearGradient>
+
+    <!-- Edge Rim Specular Highlight (濡れたガラス・寒天のような光沢) -->
+    <linearGradient id="specularRim" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
-      <stop offset="40%" stop-color="#fed7aa" stop-opacity="0.7"/>
-      <stop offset="80%" stop-color="#fb923c" stop-opacity="0.45"/>
-      <stop offset="100%" stop-color="#c2410c" stop-opacity="0.4"/>
+      <stop offset="50%" stop-color="#ffedd5" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.85"/>
     </linearGradient>
-    <filter id="noodleShadow" x="-10%" y="-10%" width="130%" height="130%">
-      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.25"/>
+
+    <!-- Chili oil tint in soup -->
+    <radialGradient id="oilSheen" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ef4444" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#b91c1c" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Deep 3D Drop Shadow -->
+    <filter id="noodle3DShadow" x="-15%" y="-15%" width="135%" height="135%">
+      <feDropShadow dx="3" dy="5" stdDeviation="4.5" flood-color="#450a0a" flood-opacity="0.4"/>
+    </filter>
+    
+    <filter id="softGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
     </filter>
   </defs>
-  <g filter="url(#noodleShadow)">
-    <!-- Flat broad glass noodles looped -->
-    <!-- Ribbon 1 (Back) -->
-    <path d="M 25 105 C 15 55 45 25 80 35 C 115 45 145 25 135 75 C 128 115 100 135 65 130 C 35 125 35 100 50 95" 
-          stroke="url(#noodleGrad1)" stroke-width="18" stroke-linecap="round" fill="none"/>
-    <path d="M 25 105 C 15 55 45 25 80 35 C 115 45 145 25 135 75 C 128 115 100 135 65 130 C 35 125 35 100 50 95" 
-          stroke="#ffedd5" stroke-width="17" stroke-linecap="round" fill="none" opacity="0.3"/>
 
-    <!-- Ribbon 2 (Front wavy layer) -->
-    <path d="M 35 60 C 60 40 85 80 115 65 C 135 55 145 95 120 120 C 95 145 60 110 35 115" 
-          stroke="url(#noodleGrad2)" stroke-width="20" stroke-linecap="round" fill="none"/>
+  <g filter="url(#noodle3DShadow)">
+    <!-- Back Loop: Deep submerged noodle segment -->
+    <path d="M 40 135 C 20 85 45 40 95 45 C 145 50 175 75 165 125 C 158 155 120 170 85 160 C 55 152 45 120 65 105" 
+          stroke="url(#noodleBody1)" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
     
-    <!-- Edge borders / translucency contour lines -->
-    <path d="M 33 50 C 58 30 83 70 113 55 C 133 45 143 85 118 110" 
-          stroke="#ffffff" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.8"/>
-    <path d="M 37 70 C 62 50 87 90 117 75 C 137 65 147 105 122 130" 
-          stroke="#ea580c" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.3"/>
+    <!-- Submerged noodle edge shadow -->
+    <path d="M 40 135 C 20 85 45 40 95 45 C 145 50 175 75 165 125 C 158 155 120 170 85 160 C 55 152 45 120 65 105" 
+          stroke="#7c2d12" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.4"/>
 
-    <!-- Highlight glisten / shiny wet glass reflection -->
-    <path d="M 45 52 Q 65 48 85 70" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.7"/>
-    <path d="M 115 72 Q 130 90 115 110" stroke="#ffffff" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.75"/>
+    <!-- Mid Layer: Broad Flat Wave 1 (特太タンミョンの平打ちリボン) -->
+    <path d="M 30 75 C 60 35 110 50 135 90 C 155 120 130 165 90 155 C 50 145 35 110 55 85" 
+          stroke="url(#noodleBody2)" stroke-width="26" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+    <!-- Front Crossing Ribbon: Wavy thick glossy strand -->
+    <path d="M 45 110 C 65 65 125 55 155 95 C 175 125 140 165 95 150 C 70 142 55 120 65 95" 
+          stroke="url(#noodleBody1)" stroke-width="25" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+    <!-- Translucent Noodle Core Lightness (芯の透明な光沢) -->
+    <path d="M 33 73 C 62 38 108 52 133 88 C 151 116 128 158 92 150" 
+          stroke="url(#specularRim)" stroke-width="14" stroke-linecap="round" fill="none" opacity="0.45"/>
+    <path d="M 48 108 C 67 68 123 58 152 94 C 168 120 136 156 97 145" 
+          stroke="#ffffff" stroke-width="12" stroke-linecap="round" fill="none" opacity="0.4"/>
+
+    <!-- Outer Edge Glaze & Highlights (ぷるぷるエッジの立体反射) -->
+    <!-- Top edge gleam -->
+    <path d="M 50 48 C 80 40 115 50 140 80" stroke="#ffffff" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.9"/>
+    <path d="M 70 65 C 105 58 135 72 150 95" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.95"/>
+    <path d="M 152 98 C 168 122 145 152 110 152" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.7"/>
+
+    <!-- Bottom inner curve shadow (くびれ・ねじれの影) -->
+    <path d="M 38 90 C 45 115 65 130 90 138" stroke="#7c2d12" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.5"/>
+    <path d="M 120 105 C 135 125 125 145 100 150" stroke="#7c2d12" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.4"/>
+
+    <!-- Wet Soup Oil Beads on Noodle (麺に絡むラー油のしずく・照り) -->
+    <ellipse cx="85" cy="58" rx="5" ry="3.5" fill="#dc2626" opacity="0.75" transform="rotate(-15 85 58)"/>
+    <circle cx="84" cy="57" r="1.2" fill="#ffffff" opacity="0.9"/>
+
+    <ellipse cx="130" cy="85" rx="6" ry="4" fill="#ea580c" opacity="0.7" transform="rotate(25 130 85)"/>
+    <circle cx="129" cy="84" r="1.5" fill="#ffffff" opacity="0.9"/>
+
+    <ellipse cx="145" cy="125" rx="5" ry="3.5" fill="#b91c1c" opacity="0.75" transform="rotate(45 145 125)"/>
+    <circle cx="144" cy="124" r="1.2" fill="#ffffff" opacity="0.9"/>
+
+    <ellipse cx="68" cy="120" rx="4.5" ry="3" fill="#dc2626" opacity="0.7" transform="rotate(-30 68 120)"/>
+    <circle cx="67" cy="119" r="1" fill="#ffffff" opacity="0.9"/>
+
+    <!-- Roasted Sesame Seeds clinging to noodle (麺に付いた白胡麻) -->
+    <ellipse cx="102" cy="72" rx="3.5" ry="2" fill="#fef08a" stroke="#d97706" stroke-width="0.8" transform="rotate(35 102 72)"/>
+    <ellipse cx="120" cy="110" rx="3.5" ry="2" fill="#fef08a" stroke="#d97706" stroke-width="0.8" transform="rotate(-20 120 110)"/>
+    <ellipse cx="58" cy="88" rx="3.5" ry="2" fill="#fef08a" stroke="#d97706" stroke-width="0.8" transform="rotate(50 58 88)"/>
+
+    <!-- Brilliant Pure White Light Reflection Specks -->
+    <circle cx="75" cy="62" r="2.5" fill="#ffffff" opacity="0.95"/>
+    <circle cx="115" cy="76" r="3" fill="#ffffff" opacity="0.95"/>
+    <circle cx="142" cy="98" r="2.8" fill="#ffffff" opacity="0.95"/>
+    <circle cx="98" cy="148" r="2.5" fill="#ffffff" opacity="0.95"/>
   </g>
 </svg>

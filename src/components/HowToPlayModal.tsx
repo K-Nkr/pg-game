@@ -39,7 +39,7 @@ export const HowToPlayModal: React.FC<HowToPlayModalProps> = ({ onClose }) => {
                 お好みのスープを選ぶ！
               </h3>
               <p className="mt-0.5 text-stone-600">
-                定番の中辛、痺れる大辛、マイルドな白湯、完熟トマト麻辣から今日のスープを選びます。
+                定番の中辛、痺れる本格大辛、マイルドな白湯、完熟トマト麻辣から今日のスープを選びます。
               </p>
             </div>
           </div>
@@ -51,10 +51,11 @@ export const HowToPlayModal: React.FC<HowToPlayModalProps> = ({ onClose }) => {
             </div>
             <div>
               <h3 className="font-bold text-stone-900 text-sm">
-                具材を自由にトッピング！
+                具材を自由にトッピング＆レイアウト！
               </h3>
               <p className="mt-0.5 text-stone-600">
-                下のパレットから具材をタップして丼に入れます。具材は自由にドラッグしてレイアウト可能！タップすると回転や削除ができます。
+                下のパレットから具材をタップして丼に入れます。具材は自由にドラッグ移動可能！
+                タップすると<strong>回転</strong>や<strong>✨キラキラ最前面エフェクト</strong>、<strong>削除</strong>ができます。
               </p>
             </div>
           </div>
@@ -66,10 +67,10 @@ export const HowToPlayModal: React.FC<HowToPlayModalProps> = ({ onClose }) => {
             </div>
             <div>
               <h3 className="font-bold text-stone-900 text-sm">
-                目指せ！ピッタリ 100.0g ⚖️
+                重さは隠しパラメータ！目指せピッタリ 100.0g ⚖️
               </h3>
               <p className="mt-0.5 text-stone-600">
-                各具材には本物そっくりの重さがあります。合計が<strong>100gに近ければ近いほど高得点！</strong> ピッタリ100.0gを出すと最高ランク『SSS 麻辣湯仙人』の称号を獲得！
+                各具材の重さは<strong>完全非表示の隠しパラメータ</strong>！本物の麻辣湯のリアルな重量をもとに設定されています。あなたの料理勘を研ぎ澄まして、ピッタリ100.0gの神計量を目指しましょう！
               </p>
             </div>
           </div>
@@ -78,12 +79,12 @@ export const HowToPlayModal: React.FC<HowToPlayModalProps> = ({ onClose }) => {
           <div className="bg-red-50 p-3 rounded-2xl border border-red-200 text-red-900">
             <h4 className="font-black flex items-center gap-1.5 text-xs">
               <Sparkles size={14} className="text-amber-600" />
-              <span>ワンポイント攻略法</span>
+              <span>現実の麻辣湯に基づくヒント</span>
             </h4>
             <ul className="mt-1 space-y-1 text-[11px] text-red-800 list-disc list-inside">
-              <li>うずらの卵（約10g）やパクチー（約5g）は微調整に最適！</li>
-              <li>具材ごとにわずかな個体差（±1〜3g）があります。</li>
-              <li>「🔥激辛プロモード」にすると重さの目安が完全非表示の究極の勘勝負に！</li>
+              <li>麺（特太タンミョン・中華麺）は1玉で約45〜48g！一気に半分近く占めます。</li>
+              <li>厚切りスパムや牛肉は重量感があり、青梗菜も水分で意外とずっしり。</li>
+              <li>うずらの卵（約11g）やパクチー（約6g）、きくらげ（約10g）は微調整に最適！</li>
             </ul>
           </div>
 

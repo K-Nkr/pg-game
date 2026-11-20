@@ -91,6 +91,33 @@ class SoundManager {
     osc.stop(now + 0.05);
   }
 
+  // キラキラ・スパイス振りかけ音（チリーン♪ピロリン♪）
+  playSparkle() {
+    const ctx = this.getContext();
+    if (!ctx) return;
+
+    const notes = [1046.5, 1318.5, 1567.98, 2093.0]; // C6, E6, G6, C7
+    const now = ctx.currentTime;
+
+    notes.forEach((freq, idx) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      const t = now + idx * 0.05;
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, t);
+
+      gain.gain.setValueAtTime(0.15, t);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.18);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(t);
+      osc.stop(t + 0.2);
+    });
+  }
+
   // 計量中のピピッ音
   playScaleTick(freq: number = 700) {
     const ctx = this.getContext();
