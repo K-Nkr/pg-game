@@ -157,9 +157,6 @@ export const ScaleResultModal: React.FC<ScaleResultModalProps> = ({
               {measuring ? '⚖️ 計量＆お会計中...' : '🧾 お会計レシート＆完成発表'}
             </h2>
           </div>
-          <span className="text-[11px] text-amber-300/80 block mt-0.5">
-            ※お会計完了！盛り直し不可の真剣勝負です
-          </span>
         </div>
 
         {/* Modal Main Body: 2 Columns on desktop (左: 完成したお皿 / 右: スケール＆レシート) */}

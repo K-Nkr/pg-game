@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="100%" height="100%">
+  <defs>
+    <linearGradient id="porkRed" x1="0%" y1="0%" x2="100%" y2="80%">
+      <stop offset="0%" stop-color="#f87171"/>
+      <stop offset="45%" stop-color="#ef4444"/>
+      <stop offset="85%" stop-color="#dc2626"/>
+      <stop offset="100%" stop-color="#991b1b"/>
+    </linearGradient>
+    <filter id="porkShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="2" dy="4" stdDeviation="3.5" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <g filter="url(#porkShadow)">
+    <!-- Wavy folded pork ribbon -->
+    <path d="M 22 75 C 35 45 65 40 85 55 C 105 70 125 45 142 62 C 152 75 138 108 120 115 C 95 125 75 95 50 115 C 25 130 12 105 22 75 Z" fill="url(#porkRed)"/>
+
+    <!-- Alternating 3-layer pork fat stripes (豚バラ三層肉の白脂身) -->
+    <path d="M 26 72 C 45 52 75 58 92 68 C 112 78 128 55 140 68" stroke="#ffffff" stroke-width="5" stroke-linecap="round" fill="none"/>
+    <path d="M 30 88 C 50 72 75 80 92 82 C 110 84 125 90 132 86" stroke="#fff1f2" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+    <path d="M 40 105 C 55 96 75 98 88 106 C 102 112 115 106 122 100" stroke="#ffffff" stroke-width="4" stroke-linecap="round" fill="none"/>
+
+    <!-- Glossy cooked meat shine -->
+    <path d="M 35 65 Q 55 48 78 56" stroke="#ffffff" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.6"/>
+    <path d="M 98 55 Q 115 50 132 62" stroke="#ffffff" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.6"/>
+  </g>
+</svg>

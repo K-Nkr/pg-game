@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Sparkles, HelpCircle } from 'lucide-react';
+import { X, HelpCircle } from 'lucide-react';
 import { sound } from '../utils/audio';
 
 interface HowToPlayModalProps {
@@ -27,7 +27,7 @@ export const HowToPlayModal: React.FC<HowToPlayModalProps> = ({ onClose }) => {
           </button>
         </div>
 
-        {/* Content */}
+        {/* Content (ヒント＆キラキラマークの説明は完全削除) */}
         <div className="p-5 space-y-4 text-stone-700 text-xs sm:text-sm">
           {/* Rule Overview */}
           <div className="bg-red-50 p-3.5 rounded-2xl border-2 border-red-300 text-center">
@@ -47,7 +47,7 @@ export const HowToPlayModal: React.FC<HowToPlayModalProps> = ({ onClose }) => {
                 お好みのスープを選ぶ！
               </h3>
               <p className="mt-0.5 text-stone-600">
-                定番中辛、本格激辛、濃厚白湯、完熟トマト麻辣から今日の気分に合わせて選べます。
+                定番中辛、本格激辛、濃厚白湯、完熟トマト麻辣から今日のスープを選びます。
               </p>
             </div>
           </div>
@@ -59,10 +59,10 @@ export const HowToPlayModal: React.FC<HowToPlayModalProps> = ({ onClose }) => {
             </div>
             <div>
               <h3 className="font-bold text-stone-900 text-sm">
-                具材を自由にトッピング！
+                具材を自由にトッピング＆レイアウト！
               </h3>
               <p className="mt-0.5 text-stone-600">
-                パレットから具材をタップしてボウルに盛り付けます。具材をタップして<strong>回転</strong>や<strong>✨キラキラ＆最前面</strong>への配置が可能です。
+                パレットから具材をタップしてボウルに盛り付けます。具材をタップして<strong>回転</strong>や<strong>削除</strong>、ドラッグ移動で好きなように配置できます。
               </p>
             </div>
           </div>
@@ -80,19 +80,6 @@ export const HowToPlayModal: React.FC<HowToPlayModalProps> = ({ onClose }) => {
                 具材の重さは秘密！1g＝4円なので、<strong>ピッタリ250.0g盛るとジャスト1,000円</strong>になります！寸分の狂いもなく1,000円を叩き出すと、最高ランク『SSS 神会計麻辣湯仙人』の称号を獲得！
               </p>
             </div>
-          </div>
-
-          {/* Tips */}
-          <div className="bg-amber-50 p-3 rounded-2xl border border-amber-300 text-amber-950">
-            <h4 className="font-black flex items-center gap-1.5 text-xs text-red-900">
-              <Sparkles size={14} className="text-amber-600" />
-              <span>1,000円（250g）攻略のヒント</span>
-            </h4>
-            <ul className="mt-1 space-y-1 text-[11px] text-stone-700 list-disc list-inside">
-              <li>麺（タンミョン・中華麺）は約45〜48g（約180〜192円分）。</li>
-              <li>お肉や青梗菜を数品入れると、大体200g（約800円）近くまで届きます。</li>
-              <li>最後の微調整は、うずらの卵（約11g＝約44円）やパクチー（約6g＝約24円）が勝負の鍵！</li>
-            </ul>
           </div>
 
           <button
