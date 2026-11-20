@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="100%" height="100%">
+  <defs>
+    <linearGradient id="tofuGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="45%" stop-color="#facc15"/>
+      <stop offset="85%" stop-color="#ca8a04"/>
+      <stop offset="100%" stop-color="#854d0e"/>
+    </linearGradient>
+    <linearGradient id="tofuLight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fef9c3"/>
+      <stop offset="100%" stop-color="#fef08a"/>
+    </linearGradient>
+    <filter id="tofuShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="2" dy="3" stdDeviation="3.5" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+  <g filter="url(#tofuShadow)">
+    <!-- Knot / pleated fold bundle (腐竹结) -->
+    <!-- Loop 1 (Back left) -->
+    <path d="M 35 45 C 20 65 30 115 65 110 C 85 105 85 85 68 75 C 50 65 45 45 35 45 Z" fill="url(#tofuGrad1)"/>
+    <!-- Loop 2 (Back right) -->
+    <path d="M 125 45 C 140 65 130 115 95 110 C 75 105 75 85 92 75 C 110 65 115 45 125 45 Z" fill="url(#tofuGrad1)"/>
+    <!-- Knot center -->
+    <ellipse cx="80" cy="88" rx="28" ry="22" fill="url(#tofuGrad1)" stroke="#854d0e" stroke-width="1.5"/>
+    <ellipse cx="80" cy="85" rx="22" ry="16" fill="url(#tofuLight)"/>
+
+    <!-- Pleats / creases lines -->
+    <path d="M 62 82 Q 80 92 98 82" stroke="#a16207" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <path d="M 66 92 Q 80 100 94 92" stroke="#a16207" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <path d="M 40 65 Q 55 75 68 72" stroke="#a16207" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <path d="M 120 65 Q 105 75 92 72" stroke="#a16207" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <path d="M 32 85 Q 45 92 55 90" stroke="#a16207" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+    <path d="M 128 85 Q 115 92 105 90" stroke="#a16207" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+
+    <!-- Highlights -->
+    <path d="M 72 76 Q 80 73 88 76" stroke="#ffffff" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <circle cx="70" cy="86" r="2.5" fill="#ffffff" opacity="0.8"/>
+  </g>
+</svg>

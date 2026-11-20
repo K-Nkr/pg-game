@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="100%" height="100%">
+  <defs>
+    <radialGradient id="fishballGrad" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="60%" stop-color="#fdf4ff"/>
+      <stop offset="85%" stop-color="#fae8ff"/>
+      <stop offset="100%" stop-color="#e9d5ff"/>
+    </radialGradient>
+    <radialGradient id="fishShine" cx="30%" cy="25%" r="35%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="fishballShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="2" dy="4" stdDeviation="3.5" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <g filter="url(#fishballShadow)">
+    <!-- Smooth Bouncy Ball -->
+    <circle cx="80" cy="80" r="58" fill="url(#fishballGrad)" stroke="#e9d5ff" stroke-width="1.5"/>
+
+    <!-- Tiny natural texture indentations -->
+    <path d="M 60 70 Q 65 72 62 76" stroke="#c084fc" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.4"/>
+    <path d="M 95 85 Q 102 90 96 95" stroke="#c084fc" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.4"/>
+
+    <!-- Juicy glaze / wet shine highlight -->
+    <ellipse cx="60" cy="55" rx="20" ry="12" transform="rotate(-25 60 55)" fill="url(#fishShine)"/>
+    <circle cx="52" cy="48" r="5" fill="#ffffff"/>
+    <circle cx="68" cy="54" r="2.5" fill="#ffffff"/>
+  </g>
+</svg>

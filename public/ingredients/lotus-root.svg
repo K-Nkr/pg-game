@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="100%" height="100%">
+  <defs>
+    <radialGradient id="lotusGrad" cx="45%" cy="45%" r="55%">
+      <stop offset="0%" stop-color="#fff8ed"/>
+      <stop offset="65%" stop-color="#faebd7"/>
+      <stop offset="90%" stop-color="#ecd5b9"/>
+      <stop offset="100%" stop-color="#d4b494"/>
+    </radialGradient>
+    <filter id="lotusShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <g filter="url(#lotusShadow)">
+    <!-- Outer lotus slice -->
+    <path d="M 80 15 C 105 14 135 30 144 55 C 152 80 146 115 125 136 C 105 152 65 152 40 138 C 15 120 10 85 18 58 C 26 30 55 16 80 15 Z" fill="url(#lotusGrad)" stroke="#c29d78" stroke-width="2.5"/>
+    
+    <!-- Outer rim notches/dents -->
+    <circle cx="80" cy="15" r="3" fill="#ecd5b9"/>
+    <circle cx="144" cy="55" r="3" fill="#ecd5b9"/>
+    <circle cx="125" cy="136" r="3" fill="#ecd5b9"/>
+    <circle cx="40" cy="138" r="3" fill="#ecd5b9"/>
+    <circle cx="18" cy="58" r="3" fill="#ecd5b9"/>
+
+    <!-- Center hole -->
+    <ellipse cx="80" cy="80" rx="9" ry="8.5" fill="#4a2e18" stroke="#8a613c" stroke-width="2"/>
+    <ellipse cx="78.5" cy="78.5" rx="7" ry="6.5" fill="#2b1708"/>
+
+    <!-- Surrounding 8 holes -->
+    <!-- Top -->
+    <ellipse cx="80" cy="45" rx="11" ry="14" fill="#3d2412" stroke="#8a613c" stroke-width="2"/>
+    <ellipse cx="78.5" cy="43.5" rx="9.5" ry="12" fill="#231206"/>
+    <!-- Top-Right -->
+    <ellipse cx="106" cy="56" rx="10" ry="13" transform="rotate(45 106 56)" fill="#3d2412" stroke="#8a613c" stroke-width="2"/>
+    <ellipse cx="104.5" cy="54.5" rx="8.5" ry="11" transform="rotate(45 106 56)" fill="#231206"/>
+    <!-- Right -->
+    <ellipse cx="118" cy="82" rx="13" ry="10" fill="#3d2412" stroke="#8a613c" stroke-width="2"/>
+    <ellipse cx="116.5" cy="80.5" rx="11" ry="8.5" fill="#231206"/>
+    <!-- Bottom-Right -->
+    <ellipse cx="106" cy="108" rx="10" ry="13" transform="rotate(-45 106 108)" fill="#3d2412" stroke="#8a613c" stroke-width="2"/>
+    <ellipse cx="104.5" cy="106.5" rx="8.5" ry="11" transform="rotate(-45 106 108)" fill="#231206"/>
+    <!-- Bottom -->
+    <ellipse cx="80" cy="118" rx="11" ry="13.5" fill="#3d2412" stroke="#8a613c" stroke-width="2"/>
+    <ellipse cx="78.5" cy="116.5" rx="9.5" ry="11.5" fill="#231206"/>
+    <!-- Bottom-Left -->
+    <ellipse cx="54" cy="108" rx="10" ry="13" transform="rotate(45 54 108)" fill="#3d2412" stroke="#8a613c" stroke-width="2"/>
+    <ellipse cx="52.5" cy="106.5" rx="8.5" ry="11" transform="rotate(45 54 108)" fill="#231206"/>
+    <!-- Left -->
+    <ellipse cx="42" cy="82" rx="13" ry="10" fill="#3d2412" stroke="#8a613c" stroke-width="2"/>
+    <ellipse cx="40.5" cy="80.5" rx="11" ry="8.5" fill="#231206"/>
+    <!-- Top-Left -->
+    <ellipse cx="54" cy="56" rx="10" ry="13" transform="rotate(-45 54 56)" fill="#3d2412" stroke="#8a613c" stroke-width="2"/>
+    <ellipse cx="52.5" cy="54.5" rx="8.5" ry="11" transform="rotate(-45 54 56)" fill="#231206"/>
+
+    <!-- Subtle texture ring -->
+    <circle cx="80" cy="80" r="28" stroke="#eed8be" stroke-dasharray="2 4" stroke-width="1.5" fill="none"/>
+  </g>
+</svg>

@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+}
+
+/* 湯気（スチーム）アニメーション */
+@keyframes steamDrift {
+  0% {
+    transform: translateY(0) scaleX(1) scaleY(1);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translateY(-25px) scaleX(1.25) scaleY(1.3);
+    opacity: 0.35;
+  }
+  100% {
+    transform: translateY(-55px) scaleX(1.5) scaleY(1.6);
+    opacity: 0;
+  }
+}
+
+.steam-particle {
+  animation: steamDrift 3.5s infinite ease-out;
+}
+
+.steam-delayed-1 {
+  animation-delay: 1.1s;
+}
+
+.steam-delayed-2 {
+  animation-delay: 2.2s;
+}
+
+/* スープの波打ち */
+@keyframes soupRipple {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+.soup-ripple {
+  animation: soupRipple 4s ease-in-out infinite;
+}
+
+/* デジタルスケール風のフォント */
+.font-mono-scale {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+/* 中華風雷紋境界線 */
+.border-chinese {
+  border-image: repeating-linear-gradient(45deg, #b91c1c, #b91c1c 8px, #dc2626 8px, #dc2626 16px) 10;
+}

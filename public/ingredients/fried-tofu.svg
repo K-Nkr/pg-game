@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="100%" height="100%">
+  <defs>
+    <radialGradient id="tofuPuff" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#fed7aa"/>
+      <stop offset="50%" stop-color="#fb923c"/>
+      <stop offset="85%" stop-color="#ea580c"/>
+      <stop offset="100%" stop-color="#9a3412"/>
+    </radialGradient>
+    <filter id="puffShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="2" dy="4" stdDeviation="3.5" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <g filter="url(#puffShadow)" transform="rotate(15 80 80)">
+    <!-- Golden fried triangular tofu puff -->
+    <path d="M 80 25 C 85 25 135 110 132 118 C 128 126 32 126 28 118 C 25 110 75 25 80 25 Z" 
+          fill="url(#tofuPuff)" stroke="#9a3412" stroke-width="2"/>
+
+    <!-- Spongy porous surface texture (気泡の穴) -->
+    <ellipse cx="65" cy="65" rx="5" ry="3.5" fill="#7c2d12" opacity="0.6"/>
+    <ellipse cx="95" cy="70" rx="4.5" ry="3" fill="#7c2d12" opacity="0.6"/>
+    <ellipse cx="78" cy="85" rx="6" ry="4" fill="#7c2d12" opacity="0.6"/>
+    <ellipse cx="55" cy="98" rx="5.5" ry="3.5" fill="#7c2d12" opacity="0.6"/>
+    <ellipse cx="102" cy="100" rx="5" ry="3.5" fill="#7c2d12" opacity="0.6"/>
+    <ellipse cx="80" cy="110" rx="6" ry="4" fill="#7c2d12" opacity="0.6"/>
+
+    <!-- Crispy golden highlights -->
+    <path d="M 75 35 L 45 105" stroke="#ffedd5" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+    <path d="M 85 35 L 115 105" stroke="#ffedd5" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+  </g>
+</svg>

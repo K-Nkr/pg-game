@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="100%" height="100%">
+  <defs>
+    <linearGradient id="shrimpGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff7b63"/>
+      <stop offset="45%" stop-color="#fc5130"/>
+      <stop offset="80%" stop-color="#e02f10"/>
+      <stop offset="100%" stop-color="#b81b02"/>
+    </linearGradient>
+    <linearGradient id="shrimpBelly" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff5f0"/>
+      <stop offset="50%" stop-color="#ffe3db"/>
+      <stop offset="100%" stop-color="#ffc7b8"/>
+    </linearGradient>
+    <filter id="shrimpShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="2" dy="4" stdDeviation="3.5" flood-opacity="0.32"/>
+    </filter>
+  </defs>
+  <g filter="url(#shrimpShadow)">
+    <!-- Curled Shrimp Body (Outer red back) -->
+    <path d="M 125 45 C 145 75 140 120 95 138 C 55 152 20 125 25 85 C 28 60 55 45 75 52 C 90 58 85 80 72 82 C 55 85 45 105 70 115 C 98 125 118 95 102 65 C 95 50 110 30 125 45 Z" fill="url(#shrimpGrad)"/>
+
+    <!-- Inner belly (White/succulent) -->
+    <path d="M 115 55 C 128 78 120 110 88 124 C 60 134 38 116 38 90 C 38 75 52 65 65 70 C 52 82 58 102 78 108 C 98 114 110 88 100 68 C 96 60 105 48 115 55 Z" fill="url(#shrimpBelly)"/>
+
+    <!-- Segment stripes across the back -->
+    <path d="M 126 62 Q 115 65 102 68" stroke="#ffffff" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.8"/>
+    <path d="M 132 80 Q 118 85 102 85" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.8"/>
+    <path d="M 125 102 Q 108 105 92 102" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.8"/>
+    <path d="M 108 122 Q 95 118 80 110" stroke="#ffffff" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.8"/>
+    <path d="M 85 135 Q 70 128 55 115" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.8"/>
+
+    <!-- Tail fins -->
+    <path d="M 122 45 C 130 30 148 20 152 35 C 145 42 135 45 125 46 Z" fill="#e02f10" stroke="#b81b02" stroke-width="1"/>
+    <path d="M 125 42 C 140 25 155 12 145 5 C 130 12 125 30 120 40 Z" fill="#fc5130" stroke="#b81b02" stroke-width="1"/>
+
+    <!-- Glossy shine on head/body curve -->
+    <path d="M 125 68 C 132 85 128 105 112 120" stroke="#ffebeb" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.6"/>
+  </g>
+</svg>

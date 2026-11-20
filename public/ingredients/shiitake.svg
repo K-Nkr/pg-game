@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="100%" height="100%">
+  <defs>
+    <radialGradient id="shiitakeGrad" cx="42%" cy="40%" r="58%">
+      <stop offset="0%" stop-color="#8a532d"/>
+      <stop offset="45%" stop-color="#673919"/>
+      <stop offset="85%" stop-color="#42200a"/>
+      <stop offset="100%" stop-color="#271104"/>
+    </radialGradient>
+    <linearGradient id="cutGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fffbeb"/>
+      <stop offset="100%" stop-color="#fef3c7"/>
+    </linearGradient>
+    <filter id="mushShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="2" dy="4" stdDeviation="4" flood-opacity="0.32"/>
+    </filter>
+  </defs>
+  <g filter="url(#mushShadow)">
+    <!-- Mushroom Cap -->
+    <path d="M 80 20 C 118 20 144 48 142 84 C 140 118 114 140 80 140 C 44 140 18 118 18 84 C 18 48 44 20 80 20 Z" fill="url(#shiitakeGrad)"/>
+
+    <!-- Decorative Cross Cuts (十字の飾り包丁 / 花刀) -->
+    <!-- Center star cut 1 (Top-Bottom) -->
+    <path d="M 75 35 C 78 60 76 72 80 80 C 84 72 82 60 85 35 Q 80 32 75 35 Z" fill="url(#cutGrad)" stroke="#42200a" stroke-width="1"/>
+    <path d="M 75 125 C 78 100 76 88 80 80 C 84 88 82 100 85 125 Q 80 128 75 125 Z" fill="url(#cutGrad)" stroke="#42200a" stroke-width="1"/>
+
+    <!-- Center star cut 2 (Left-Right) -->
+    <path d="M 35 75 C 60 78 72 76 80 80 C 72 84 60 82 35 85 Q 32 80 35 75 Z" fill="url(#cutGrad)" stroke="#42200a" stroke-width="1"/>
+    <path d="M 125 75 C 100 78 88 76 80 80 C 88 84 100 82 125 85 Q 128 80 125 75 Z" fill="url(#cutGrad)" stroke="#42200a" stroke-width="1"/>
+
+    <!-- Gills / Edge curl details -->
+    <path d="M 28 80 C 22 98 32 120 50 130" stroke="#271104" stroke-width="2" fill="none" opacity="0.6"/>
+    <path d="M 132 80 C 138 98 128 120 110 130" stroke="#271104" stroke-width="2" fill="none" opacity="0.6"/>
+
+    <!-- Soft surface highlights -->
+    <ellipse cx="60" cy="48" rx="14" ry="8" transform="rotate(-30 60 48)" fill="#ffffff" opacity="0.2"/>
+    <ellipse cx="105" cy="52" rx="12" ry="7" transform="rotate(25 105 52)" fill="#ffffff" opacity="0.15"/>
+  </g>
+</svg>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="100%" height="100%">
+  <defs>
+    <linearGradient id="beefRed" x1="0%" y1="0%" x2="100%" y2="80%">
+      <stop offset="0%" stop-color="#b82626"/>
+      <stop offset="40%" stop-color="#991b1b"/>
+      <stop offset="80%" stop-color="#7f1d1d"/>
+      <stop offset="100%" stop-color="#581414"/>
+    </linearGradient>
+    <linearGradient id="beefFat" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#fff5f5"/>
+      <stop offset="100%" stop-color="#fed7d7"/>
+    </linearGradient>
+    <filter id="beefShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="2" dy="4" stdDeviation="3.5" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <g filter="url(#beefShadow)">
+    <!-- Wavy folded beef ribbon -->
+    <path d="M 20 85 C 30 50 60 40 85 55 C 110 70 120 45 145 60 C 155 75 140 105 125 115 C 95 130 80 100 55 115 C 30 130 10 115 20 85 Z" fill="url(#beefRed)"/>
+
+    <!-- Fold shading for 3D ribbon effect -->
+    <path d="M 45 68 C 65 78 75 95 85 95 C 100 95 110 75 125 70 C 135 85 125 105 115 112 C 95 120 75 95 52 110 Z" fill="#661010" opacity="0.6"/>
+
+    <!-- Marbled Fat ribbons (サシ) -->
+    <path d="M 25 80 C 40 60 70 65 85 75 C 105 85 120 62 140 70" stroke="url(#beefFat)" stroke-width="5" stroke-linecap="round" fill="none"/>
+    <path d="M 28 92 C 45 80 65 88 80 88 C 98 88 115 95 130 92" stroke="url(#beefFat)" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+    <path d="M 40 108 C 55 100 70 105 85 112 C 100 118 115 112 122 105" stroke="url(#beefFat)" stroke-width="4" stroke-linecap="round" fill="none"/>
+    
+    <!-- Fine marbling veins -->
+    <path d="M 50 55 Q 60 62 70 58" stroke="#ffe4e6" stroke-width="1.8" fill="none"/>
+    <path d="M 95 62 Q 105 68 115 62" stroke="#ffe4e6" stroke-width="2" fill="none"/>
+    <path d="M 65 95 Q 75 102 70 112" stroke="#ffe4e6" stroke-width="1.5" fill="none"/>
+
+    <!-- Glossy cooked shine -->
+    <path d="M 32 72 Q 50 52 75 60" stroke="#ffffff" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.6"/>
+    <path d="M 100 56 Q 120 52 135 62" stroke="#ffffff" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.6"/>
+  </g>
+</svg>
